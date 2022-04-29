@@ -1,0 +1,17 @@
+{
+  "name": "typescript-node-fs-json-read-write",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "ts-node ./src/ts/main.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  }
+}

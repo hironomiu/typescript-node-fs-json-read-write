@@ -1,0 +1,16 @@
+[
+    {
+        "firstName": "太郎",
+        "lastName": "鈴木",
+        "nickname": "taro",
+        "email": "taro@example.com",
+        "age": 18
+    },
+    {
+        "firstName": "花子",
+        "lastName": "佐藤",
+        "nickname": "hanako",
+        "email": "hanako@example.com",
+        "age": 20
+    }
+]
