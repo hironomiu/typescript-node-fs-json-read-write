@@ -78,7 +78,7 @@ try {
   console.log('error:', e)
 }
 
-//  fs stream pipe中に暗号化
+//  fs stream pipe中に暗号化し出力、暗号化したファイルを復号し出力
 try {
   const outputFilePath = path.join(cwd, '/json/output5.json')
   const algorithm = 'aes-256-cbc'
