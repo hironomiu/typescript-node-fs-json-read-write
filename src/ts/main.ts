@@ -65,3 +65,42 @@ try {
 } catch (e) {
   console.log('error:', e)
 }
+
+// fs stream pipe中にハッシュ化
+import crypto from 'crypto'
+try {
+  const outputFilePath = path.join(cwd, '/json/output4.json')
+  fs.createReadStream(inputFilePath)
+    .pipe(crypto.createHash('sha256'))
+    .pipe(fs.createWriteStream(outputFilePath))
+    .on('finish', () => console.log('fs.createWriteStream & crypto finish'))
+} catch (e) {
+  console.log('error:', e)
+}
+
+//  fs stream pipe中に暗号化
+try {
+  const outputFilePath = path.join(cwd, '/json/output5.json')
+  const algorithm = 'aes-256-cbc'
+  const key = crypto.scryptSync('abcdefgh', '12345678', 32)
+  const iv = crypto.randomBytes(16)
+  const cipher = crypto.createCipheriv(algorithm, key, iv)
+  fs.createReadStream(inputFilePath)
+    .pipe(cipher)
+    .pipe(fs.createWriteStream(outputFilePath))
+    .on('finish', () => console.log('cipher finish'))
+
+  // TODO: 暗号化が終わってから実行の違う書き方（今はsetTimeoutで決め打ちでwaitさせて実行している）
+  ;(async () => {
+    await new Promise((resolve) => setTimeout(resolve, 100))
+    const outputFilePath2 = path.join(cwd, '/json/output6.json')
+    const decipher = crypto.createDecipheriv(algorithm, key, iv)
+    // decipher.setAutoPadding(false)
+    fs.createReadStream(outputFilePath)
+      .pipe(decipher)
+      .pipe(fs.createWriteStream(outputFilePath2))
+      .on('finish', () => console.log('decipher finish'))
+  })()
+} catch (e) {
+  console.log('error:', e)
+}
