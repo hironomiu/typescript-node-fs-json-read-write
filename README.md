@@ -1,6 +1,6 @@
 # typescript-node-fs-json-read-write
 
-ローカルファイルに存在する JSON の読み(fs ,import)書き(fs)の例
+ローカルファイルに存在する JSON の読み(fs(FileSync,Stream) ,import)書き(fs(FileSync,Stream))の例
 
 ## run
 

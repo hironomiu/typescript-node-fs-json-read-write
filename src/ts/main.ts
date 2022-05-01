@@ -13,8 +13,8 @@ type User = {
 }
 
 // fsでJSONの読み込み&書き込み
+const inputFilePath = path.join(cwd, '/json/input.json')
 try {
-  const inputFilePath = path.join(cwd, '/json/input.json')
   const json = fs.readFileSync(inputFilePath, 'utf-8')
   const users: User[] = JSON.parse(json)
 
@@ -52,6 +52,16 @@ try {
 
   // ファイルが存在する場合は上書き
   fs.writeFileSync(outputFilePath, JSON.stringify(outputUsers))
+} catch (e) {
+  console.log('error:', e)
+}
+
+// fs stream利用
+try {
+  const outputFilePath = path.join(cwd, '/json/output3.json')
+  fs.createReadStream(inputFilePath)
+    .pipe(fs.createWriteStream(outputFilePath))
+    .on('finish', () => console.log('fs.createWriteStream finish'))
 } catch (e) {
   console.log('error:', e)
 }
