@@ -113,7 +113,7 @@ try {
   const readStream = fs.createReadStream(filePath)
   readStream
     .on('readable', () => {
-      let chunk
+      let chunk: fs.ReadStream
       while ((chunk = readStream.read()) !== null) {
         console.log(`chunk:${chunk}`)
       }
