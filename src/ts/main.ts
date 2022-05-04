@@ -104,3 +104,19 @@ try {
 } catch (e) {
   console.log('error:', e)
 }
+
+// fs 読み込みストリーム
+{
+  const cwd = process.cwd()
+  console.log(cwd)
+  const filePath = path.join(cwd, '/json//input.json')
+  const readStream = fs.createReadStream(filePath)
+  readStream
+    .on('readable', () => {
+      let chunk
+      while ((chunk = readStream.read()) !== null) {
+        console.log(`chunk:${chunk}`)
+      }
+    })
+    .on('end', () => console.log('end'))
+}
